@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_inherit_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//field[@name='barcode']" position="after">
+                        <field name="allowed_pos"  widget="many2many_tags"  options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+      <record id="view_partner_inherit_tree" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath  expr="/tree/field[@name='display_name']" position="after">
+                        <field name="allowed_pos" widget="many2many_tags" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="pos_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settingspos.view.form.inherit.point_of_sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="95"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath  expr="//div[@id='pos_technical_section']" position="inside">
+                <div class="content-group mt16">
+                    <field name="pos_restrict_customer_only" class="oe_inline" />
+                    <label for="pos_restrict_customer_only" string="Load only Restrict customer in the background" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
